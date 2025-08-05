@@ -4,13 +4,21 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
   thymeleaf:
     cache: false
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
 
 # Optional: H2 console
 spring.h2.console.enabled: true
 spring.h2.console.path: /h2
+
