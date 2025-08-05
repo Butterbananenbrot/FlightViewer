@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FlightviewerApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(FlightviewerApplication.class, args);
     }
-
 }

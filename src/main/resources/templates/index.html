@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Flights</title>
+</head>
+<body>
+<h1>Flights</h1>
+
+<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Upload CSV</button>
+</form>
+
+<p th:if="${msg}" th:text="${msg}"></p>
+<p th:if="${error}" th:text="${error}"></p>
+
+<table border="1">
+    <tr><th>ID</th><th>Start</th><th>Distance (m)</th></tr>
+    <tr th:each="f : ${flights}">
+        <td><a th:href="@{'/flight/' + ${f.id}}" th:text="${f.id}">1</a></td>
+        <td th:text="${f.startTime}">-</td>
+        <td th:text="${f.distanceMeters}">-</td>
+    </tr>
+</table>
+</body>
+</html>
