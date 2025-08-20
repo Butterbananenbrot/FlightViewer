@@ -16,4 +16,4 @@ Start the app from the IDE, go to localhost:8080 and upload the CSV log file to 
 
 The interface looks like this:
 
-![Map + Altitude Replay](FlightRecord/images/ExampleScreenshot.jpg)
+![Map + Altitude Replay](./docs/ExampleScreenshot.jpg)
