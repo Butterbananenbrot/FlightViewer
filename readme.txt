@@ -8,6 +8,6 @@ https://github.com/dji-sdk/FlightRecordParsingLib
 
 For testing and demonstration purposes, use the
 /FlightRecord/Converted to CSV/demo flight one.csv
-/FlightRecord/Converted to CSV/demo flight one.csv
+/FlightRecord/Converted to CSV/demo flight two.csv
 
 Start the app from the IDE, go to localhost:8080 and upload the CSV log file to view flight data.

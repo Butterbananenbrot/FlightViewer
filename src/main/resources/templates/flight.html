@@ -1,20 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Flight</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <style>#map {height: 400px;}</style>
+    <title>Flight [[${flightId}]]</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <style>
+        #map{height:400px;margin-bottom:12px;}
+        #altChart{height:160px;max-width:900px;}
+    </style>
 </head>
 <body>
 <h1>Flight [[${flightId}]]</h1>
 
 <div id="map"></div>
-<button onclick="startReplay()">Replay (10×)</button>
+<canvas id="altChart" width="900" height="200"></canvas>
+<button id="replayBtn">Replay (10×)</button>
 
+<!-- libs -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
+
+<!-- safe Thymeleaf var injection (keeps valid JS if not processed) -->
 <script th:inline="javascript">
-    const flightId = [[${flightId}]];
+    var flightId = /*[[${flightId}]]*/ 0;
 </script>
+
+<!-- your app js -->
 <script src="/js/flight.js"></script>
 </body>
 </html>

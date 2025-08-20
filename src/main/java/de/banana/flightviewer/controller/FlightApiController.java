@@ -22,10 +22,18 @@ public class FlightApiController {
     }
 
     @GetMapping("/{id}/samples")
-    public List<SampleDto> samples(@PathVariable Long id) {
-        return samples.findByFlightIdOrderByTimestamp(id)
-                .stream().map(SampleDto::from).toList();
+    public List<SampleDto> samples(@PathVariable Long id){
+        var list = samples.findByFlightIdOrderByTimestamp(id);
+        if (!list.isEmpty()) {
+            var s = list.get(0);
+            System.out.println("[FlightApi] First sample: lat=" + s.getLatitude()
+                    + ", lon=" + s.getLongitude()
+                    + ", alt=" + s.getAltitude()
+                    + ", ts=" + s.getTimestamp().toEpochMilli());
+        }
+        return list.stream().map(SampleDto::from).toList();
     }
+
 
     @GetMapping("/{id}/track")
     public Map<String, Object> track(@PathVariable Long id) {
