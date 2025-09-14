@@ -19,31 +19,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Imports a DJI FlightRecord *.TXT that has been converted to CSV
- * by PhantomHelp, AirData, or DJI Assistant.
- *
+ * Service for importing drone flight data from CSV files.
+ * <p>
+ * Imports a DJI FlightRecord *.TXT that has been converted to CSV by PhantomHelp, AirData, or DJI Assistant.
+ * <br>
  * Required column names (exact, case-sensitive):
- *   - OSD.flyTime [s]        (double seconds since motors-on)
- *   - OSD.latitude           (decimal degrees)
- *   - OSD.longitude          (decimal degrees)
- *   - OSD.altitude [ft]      (double feet AGL)
- *   - OSD.hSpeed [MPH]       (horizontal speed mph)
- *   - BATTERY.chargeLevel    (int 0-100)
- *
+ * <ul>
+ *   <li>OSD.flyTime [s]        (double seconds since motors-on)</li>
+ *   <li>OSD.latitude           (decimal degrees)</li>
+ *   <li>OSD.longitude          (decimal degrees)</li>
+ *   <li>OSD.altitude [ft]      (double feet AGL)</li>
+ *   <li>OSD.hSpeed [MPH]       (horizontal speed mph)</li>
+ *   <li>BATTERY.chargeLevel    (int 0-100)</li>
+ * </ul>
  * Any other columns are ignored.
+ * </p>
  */
 @Service
 public class CsvImportService {
 
+    /**
+     * Repository for storing Flight entities.
+     */
     private final FlightRepository flightRepo;
+    /**
+     * Repository for storing Sample entities.
+     */
     private final SampleRepository sampleRepo;
 
+    /**
+     * Constructs a CsvImportService with the required repositories.
+     *
+     * @param flightRepo repository for Flight entities
+     * @param sampleRepo repository for Sample entities
+     */
     public CsvImportService(FlightRepository flightRepo, SampleRepository sampleRepo) {
         this.flightRepo = flightRepo;
         this.sampleRepo = sampleRepo;
     }
 
-    /** Public entry point: call from the upload controller. */
+    /**
+     * Imports flight data from a CSV file and stores it in the database.
+     *
+     * @param file the uploaded CSV file
+     * @return the imported Flight entity
+     * @throws IOException if an I/O error occurs during import
+     */
     public Flight importCsv(MultipartFile file) throws IOException {
 
         List<Sample> samples = new ArrayList<>();
